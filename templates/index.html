@@ -8,47 +8,55 @@
 </head>
 <body>
 
-<div class="card">
-  <div class="header">
-    <div class="icon">💱</div>
-    <h1>Conversor Cripto</h1>
-    <p>Backend próprio + API da CoinGecko</p>
-  </div>
+<div style="display: flex; flex-direction: column; align-items: center; width: 100%; gap: 20px;">
 
-  <div class="field">
-    <label for="amount">Quantidade</label>
-    <input type="text" id="amount" placeholder="Ex: 0.5" inputmode="decimal">
-  </div>
-
-  <div class="row">
-    <div class="field">
-      <label for="coin">Moeda</label>
-      <select id="coin">
-        <option value="BTC">Bitcoin (BTC)</option>
-        <option value="ETH">Ethereum (ETH)</option>
-        <option value="SOL">Solana (SOL)</option>
-        <option value="DOGE">Dogecoin (DOGE)</option>
-        <option value="ADA">Cardano (ADA)</option>
-        <option value="XRP">XRP</option>
-      </select>
+  <div class="card">
+    <div class="header">
+      <div class="icon">💱</div>
+      <h1>Conversor Cripto</h1>
+      <p>Backend próprio + API da CoinGecko</p>
     </div>
+
     <div class="field">
-      <label for="currency">Para</label>
-      <select id="currency">
-        <option value="BRL">BRL (R$)</option>
-        <option value="USD">USD ($)</option>
-        <option value="EUR">EUR (€)</option>
-      </select>
+      <label for="amount">Quantidade</label>
+      <input type="text" id="amount" placeholder="Ex: 0.5" inputmode="decimal">
     </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="coin">Moeda</label>
+        <select id="coin">
+          <option value="BTC">Bitcoin (BTC)</option>
+          <option value="ETH">Ethereum (ETH)</option>
+          <option value="SOL">Solana (SOL)</option>
+          <option value="DOGE">Dogecoin (DOGE)</option>
+          <option value="ADA">Cardano (ADA)</option>
+          <option value="XRP">XRP</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="currency">Para</label>
+        <select id="currency">
+          <option value="BRL">BRL (R$)</option>
+          <option value="USD">USD ($)</option>
+          <option value="EUR">EUR (€)</option>
+        </select>
+      </div>
+    </div>
+
+    <button id="btn" onclick="converter()">Converter</button>
+
+    <div class="result" id="result" style="display:none;"></div>
+
+    <p class="footer-note">
+      Dados de preço: <a href="https://www.coingecko.com" target="_blank" rel="noopener">CoinGecko</a>
+    </p>
   </div>
 
-  <button id="btn" onclick="converter()">Converter</button>
+  <footer style="text-align: center; font-size: 16px; color: #ffffff;">
+    <a href="https://instagram.com/souzawebdigital" target="_blank" rel="noopener" style="color: #ffffff; text-decoration: underline;">Follow @souzawebdigital on Instagram</a>
+  </footer>
 
-  <div class="result" id="result" style="display:none;"></div>
-
-  <p class="footer-note">
-    Dados de preço: <a href="https://www.coingecko.com" target="_blank" rel="noopener">CoinGecko</a>
-  </p>
 </div>
 
 <script>
@@ -99,8 +107,5 @@ document.getElementById('amount').addEventListener('keydown', (e) => {
 });
 </script>
 
-    <footer style="text-align: center; padding: 16px; font-size: 14px;">
-        <a href="https://instagram.com/souzawebdigital" target="_blank" rel="noopener">Follow @souzawebdigital on Instagram</a>
-    </footer>
 </body>
 </html>
