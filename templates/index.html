@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conversor Cripto</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="card">
+  <div class="header">
+    <div class="icon">💱</div>
+    <h1>Conversor Cripto</h1>
+    <p>Backend próprio + API da CoinGecko</p>
+  </div>
+
+  <div class="field">
+    <label for="amount">Quantidade</label>
+    <input type="text" id="amount" placeholder="Ex: 0.5" inputmode="decimal">
+  </div>
+
+  <div class="row">
+    <div class="field">
+      <label for="coin">Moeda</label>
+      <select id="coin">
+        <option value="BTC">Bitcoin (BTC)</option>
+        <option value="ETH">Ethereum (ETH)</option>
+        <option value="SOL">Solana (SOL)</option>
+        <option value="DOGE">Dogecoin (DOGE)</option>
+        <option value="ADA">Cardano (ADA)</option>
+        <option value="XRP">XRP</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="currency">Para</label>
+      <select id="currency">
+        <option value="BRL">BRL (R$)</option>
+        <option value="USD">USD ($)</option>
+        <option value="EUR">EUR (€)</option>
+      </select>
+    </div>
+  </div>
+
+  <button id="btn" onclick="converter()">Converter</button>
+
+  <div class="result" id="result" style="display:none;"></div>
+
+  <p class="footer-note">
+    Dados de preço: <a href="https://www.coingecko.com" target="_blank" rel="noopener">CoinGecko</a>
+  </p>
+</div>
+
+<script>
+const moedaSimbolo = { BRL: 'R$', USD: '$', EUR: '€' };
+
+async function converter() {
+  const amountInput = document.getElementById('amount');
+  const coin = document.getElementById('coin').value;
+  const currency = document.getElementById('currency').value;
+  const resultDiv = document.getElementById('result');
+  const btn = document.getElementById('btn');
+
+  resultDiv.style.display = 'block';
+  resultDiv.classList.remove('error');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Consultando...';
+  resultDiv.innerHTML = 'Buscando cotação...';
+
+  try {
+    const url = `/api/convert?amount=${encodeURIComponent(amountInput.value)}&coin=${coin}&currency=${currency}`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || 'Erro desconhecido');
+    }
+
+    const totalFormatado = data.total.toLocaleString('pt-BR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 4
+    });
+
+    resultDiv.innerHTML = `
+      ${data.amount} ${data.coin} equivalem a
+      <span class="value">${moedaSimbolo[data.currency]} ${totalFormatado}</span>
+    `;
+  } catch (err) {
+    resultDiv.classList.add('error');
+    resultDiv.textContent = err.message;
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = 'Converter';
+  }
+}
+
+document.getElementById('amount').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') converter();
+});
+</script>
+
+</body>
+</html>

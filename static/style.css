@@ -1,0 +1,128 @@
+:root {
+  --bg1: #0f172a;
+  --bg2: #1e293b;
+  --card: #ffffff;
+  --card-text: #1e293b;
+  --muted: #64748b;
+  --accent: #6366f1;
+  --accent-dark: #4338ca;
+  --error: #dc2626;
+  --border: #e2e8f0;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: radial-gradient(circle at top left, var(--bg2), var(--bg1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.card {
+  background: var(--card);
+  color: var(--card-text);
+  width: 100%;
+  max-width: 420px;
+  border-radius: 20px;
+  padding: 32px 28px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+}
+
+.header { text-align: center; margin-bottom: 24px; }
+.header .icon { font-size: 36px; margin-bottom: 4px; }
+.header h1 { font-size: 22px; margin: 4px 0 2px; }
+.header p { font-size: 13px; color: var(--muted); margin: 0; }
+
+label {
+  font-size: 13px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+}
+
+.field { margin-bottom: 18px; }
+
+input, select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  font-size: 15px;
+  background: #f8fafc;
+  color: var(--card-text);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+input:focus, select:focus { border-color: var(--accent); }
+
+.row { display: flex; gap: 12px; }
+.row .field { flex: 1; }
+
+button {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 12px;
+  background: var(--accent);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+button:hover { background: var(--accent-dark); }
+button:active { transform: scale(0.98); }
+button:disabled { background: #a5b4fc; cursor: not-allowed; }
+
+.result {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 14px;
+  background: #eef2ff;
+  text-align: center;
+  min-height: 24px;
+  font-size: 14px;
+}
+
+.result .value {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--accent-dark);
+  display: block;
+  margin-top: 4px;
+}
+
+.result.error {
+  background: #fef2f2;
+  color: var(--error);
+  font-weight: 600;
+}
+
+.footer-note {
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 18px;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.5);
+  border-top-color: white;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
